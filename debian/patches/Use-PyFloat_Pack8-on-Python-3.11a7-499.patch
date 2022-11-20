@@ -1,0 +1,69 @@
+Description: Use PyFloat_Pack8() on Python 3.11a7 (#499)
+ Python 3.11a7 adds public functions:
+ * PyFloat_Pack4(), PyFloat_Pack8()
+ * PyFloat_Unpack4(), PyFloat_Unpack8()
+ https://bugs.python.org/issue46906
+Author: Victor Stinner <vstinner@python.org>
+Date: Mon, 14 Mar 2022 03:23:11 +0100
+Origin: upstream,  https://github.com/msgpack/msgpack-python/commit/849c8063817894f7dba166a19fbdbb9ffd8c2b80.patch
+Last-Update: 2022-11-20
+
+diff --git a/msgpack/pack_template.h b/msgpack/pack_template.h
+index 0e940b8..7d479b6 100644
+--- a/msgpack/pack_template.h
++++ b/msgpack/pack_template.h
+@@ -568,7 +568,12 @@ static inline int msgpack_pack_float(msgpack_packer* x, float d)
+ {
+     unsigned char buf[5];
+     buf[0] = 0xca;
++
++#if PY_VERSION_HEX >= 0x030B00A7
++    PyFloat_Pack4(d, (char *)&buf[1], 0);
++#else
+     _PyFloat_Pack4(d, &buf[1], 0);
++#endif
+     msgpack_pack_append_buffer(x, buf, 5);
+ }
+ 
+@@ -576,7 +581,11 @@ static inline int msgpack_pack_double(msgpack_packer* x, double d)
+ {
+     unsigned char buf[9];
+     buf[0] = 0xcb;
++#if PY_VERSION_HEX >= 0x030B00A7
++    PyFloat_Pack8(d, (char *)&buf[1], 0);
++#else
+     _PyFloat_Pack8(d, &buf[1], 0);
++#endif
+     msgpack_pack_append_buffer(x, buf, 9);
+ }
+ 
+diff --git a/msgpack/unpack_template.h b/msgpack/unpack_template.h
+index 9924b9c..8b9fcc1 100644
+--- a/msgpack/unpack_template.h
++++ b/msgpack/unpack_template.h
+@@ -243,10 +243,20 @@ static inline int unpack_execute(unpack_context* ctx, const char* data, Py_ssize
+                                           _msgpack_load32(uint32_t,n)+1,
+                                           _ext_zero);
+             case CS_FLOAT: {
+-                    double f = _PyFloat_Unpack4((unsigned char*)n, 0);
++                    double f;
++#if PY_VERSION_HEX >= 0x030B00A7
++                    f = PyFloat_Unpack4((const char*)n, 0);
++#else
++                    f = _PyFloat_Unpack4((unsigned char*)n, 0);
++#endif
+                     push_fixed_value(_float, f); }
+             case CS_DOUBLE: {
+-                    double f = _PyFloat_Unpack8((unsigned char*)n, 0);
++                    double f;
++#if PY_VERSION_HEX >= 0x030B00A7
++                    f = PyFloat_Unpack8((const char*)n, 0);
++#else
++                    f = _PyFloat_Unpack8((unsigned char*)n, 0);
++#endif
+                     push_fixed_value(_double, f); }
+             case CS_UINT_8:
+                 push_fixed_value(_uint8, *(uint8_t*)n);
+-- 
+2.30.2
+

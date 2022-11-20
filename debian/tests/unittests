@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+set -x
+
+PYTHON3S=$(py3versions -vs)
+for i in ${PYTHON3S} ; do
+	python$i -m pytest test -v
+done
