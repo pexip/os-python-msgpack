@@ -1,3 +1,10 @@
+python-msgpack (1.0.3-3) unstable; urgency=medium
+
+  * Add extend-diff-ignore for the egg-info (Closes: #1045716).
+  * Clean msgpack/_cmsgpack.cpp.
+
+ -- Thomas Goirand <zigo@debian.org>  Tue, 15 Aug 2023 16:13:48 +0200
+
 python-msgpack (1.0.3-2) unstable; urgency=medium
 
   * Add Use-PyFloat_Pack8-on-Python-3.11a7-499.patch (Closes: #1024314).

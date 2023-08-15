@@ -24,3 +24,4 @@ endif
 override_dh_clean:
 	dh_clean -O--buildsystem=pybuild
 	rm -rf build
+	rm -f msgpack/_cmsgpack.cpp
