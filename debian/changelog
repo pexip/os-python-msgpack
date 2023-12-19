@@ -1,4 +1,4 @@
-python-msgpack (1.0.3-2pexip1) pexip; urgency=medium
+python-msgpack (1.0.3-2pexip1) pexip-bookworm; urgency=medium
 
   * Prepare Pexip packaging
 
