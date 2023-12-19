@@ -1,3 +1,9 @@
+python-msgpack (1.0.3-2pexip1) pexip; urgency=medium
+
+  * Prepare Pexip packaging
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Tue, 19 Dec 2023 18:25:44 +0000
+
 python-msgpack (1.0.3-2) unstable; urgency=medium
 
   * Add Use-PyFloat_Pack8-on-Python-3.11a7-499.patch (Closes: #1024314).

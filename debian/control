@@ -1,8 +1,9 @@
 Source: python-msgpack
 Section: python
 Priority: optional
-Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
-Uploaders:
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Debian OpenStack <team+openstack@tracker.debian.org>
+XSBC-Pexip-Original-Uploaders:
  Robert S. Edmonds <edmonds@debian.org>,
  Thomas Goirand <zigo@debian.org>,
 Build-Depends:
@@ -17,6 +18,7 @@ Standards-Version: 4.4.1
 Vcs-Git: https://salsa.debian.org/openstack-team/python/python-msgpack.git
 Vcs-Browser: https://salsa.debian.org/openstack-team/python/python-msgpack
 Homepage: https://pypi.python.org/pypi/msgpack
+XS-Pexip-Upstream: http://deb.debian.org/debian/ bookworm
 
 Package: python3-msgpack
 Architecture: any
