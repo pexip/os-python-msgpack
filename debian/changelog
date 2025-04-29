@@ -1,3 +1,9 @@
+python-msgpack (1.0.3-3+pexip25u1) pexip-trixie; urgency=medium
+
+  * Initial trixie build
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Tue, 29 Apr 2025 22:54:50 +0100
+
 python-msgpack (1.0.3-3) unstable; urgency=medium
 
   * Add extend-diff-ignore for the egg-info (Closes: #1045716).
